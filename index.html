@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>For My Mahila Dost</title>
+    <title>Happy Birthday Kirti</title>
     <style>
         body {
-            background: black;
+            background: linear-gradient(black, #1a001a);
             color: white;
             font-family: Arial;
             text-align: center;
-            padding: 50px;
+            padding: 30px;
+            overflow: hidden;
         }
 
         button {
@@ -17,6 +18,7 @@
             border: none;
             background: pink;
             font-size: 16px;
+            margin-top: 20px;
         }
 
         input {
@@ -28,36 +30,145 @@
         .page {
             display: none;
         }
+
+        .heart {
+            position: absolute;
+            color: pink;
+            font-size: 20px;
+            animation: float 5s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-800px); opacity: 0; }
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.imgur.com/YKY28eT.png');
+            animation: moveStars 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveStars {
+            from {background-position: 0 0;}
+            to {background-position: 10000px 5000px;}
+        }
+
+        .glow {
+            font-size: 40px;
+            color: pink;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px pink; }
+            to { text-shadow: 0 0 30px purple; }
+        }
+
+        .cake {
+            font-size: 80px;
+            animation: cakeBounce 2s infinite;
+        }
+
+        @keyframes cakeBounce {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
+<div class="stars"></div>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mp3">
+</audio>
+
 <div id="start">
-    <h1>I made something for you</h1>
+    <h1>I made something for you Kirti</h1>
+    <h2 id="countdown"></h2>
     <button onclick="showPassword()">Click to Start</button>
 </div>
 
 <div id="passwordPage" class="page">
     <h2>Enter Password</h2>
     <input type="password" id="pass">
+    <br>
     <button onclick="checkPass()">Enter</button>
 </div>
 
 <div id="page1" class="page">
-    <h2>Happy Birthday!</h2>
-    <p>You are a very important person in my life.</p>
+    <h1 class="glow">Happy Birthday Kirti</h1>
+    <p id="typing"></p>
     <button onclick="nextPage('page2')">Next</button>
 </div>
 
 <div id="page2" class="page">
-    <h2>Thank You</h2>
-    <p>Thank you for being in my life and making everything better.</p>
+    <h1>You Are Special</h1>
+    <p>
+    You are one of the most kind, caring, and beautiful souls I have ever known.
+    You always listen, you always understand, and you always stay even when things are not perfect.
+    I am really very lucky to have you in my life.
+    </p>
     <button onclick="nextPage('page3')">Next</button>
 </div>
 
 <div id="page3" class="page">
-    <h2>Final Message</h2>
-    <p>I am really lucky to have you as my best friend.</p>
+    <h1>Queen Kirti</h1>
+    <p>
+    Today is not just your birthday.
+    Today the world got a beautiful heart, a beautiful smile, and a beautiful person.
+    So today you are Queen Kirti, and you deserve to feel special the whole day.
+    </p>
+    <button onclick="nextPage('page4')">Next</button>
+</div>
+
+<div id="page4" class="page">
+    <h1>Happp Moment</h1>
+    <p>
+    I still laugh when you say "Happp" instead of shut up.
+    Small things like this are the reason our friendship is special and different.
+    </p>
+    <button onclick="nextPage('page5')">Next</button>
+</div>
+
+<div id="page5" class="page">
+    <h1>Our Goal</h1>
+    <p>
+    One day we will meet, eat a lot of delicious food, talk for hours,
+    laugh without any reason, and that day will be one of my favorite days in life.
+    </p>
+    <button onclick="nextPage('page6')">Next</button>
+</div>
+
+<div id="page6" class="page">
+    <h1>Birthday Cake For You</h1>
+    <div class="cake">🎂🕯</div>
+    <p>
+    If I could, I would bring a real cake for you.
+    But for now, this is a small digital cake for the most special birthday girl.
+    Make a wish.
+    </p>
+    <button onclick="nextPage('page7')">Next</button>
+</div>
+
+<div id="page7" class="page">
+    <h1>Final Message</h1>
+    <p>
+    I don’t know what the future holds,
+    but I just want you to know that you are a very important part of my life.
+    No matter how much things change,
+    you will always be someone I care about and respect.
+    I just want to see you happy and successful.
+    Happy Birthday Kirti.
+    </p>
+    <button onclick="secretMessage()">Click One Last Time</button>
+    <br>
+    <button onclick="longMessage()">One More Message</button>
 </div>
 
 <script>
@@ -72,16 +183,87 @@ function checkPass() {
     if(password == "formymahiladost") {
         document.getElementById("passwordPage").style.display = "none";
         document.getElementById("page1").style.display = "block";
+        document.getElementById("music").play();
+        createHearts();
+        typeText();
     } else {
         alert("Wrong Password");
     }
 }
 
 function nextPage(page) {
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("page2").style.display = "none";
-    document.getElementById("page3").style.display = "none";
+    var pages = ["page1","page2","page3","page4","page5","page6","page7"];
+    pages.forEach(function(p){
+        document.getElementById(p).style.display = "none";
+    });
     document.getElementById(page).style.display = "block";
+}
+
+function secretMessage() {
+    fireworks();
+    alert("You are not just beautiful by face, you are beautiful by heart and nature. Never change.");
+}
+
+function longMessage() {
+    alert("If I had to choose good people in my life, I would choose you again without thinking.");
+}
+
+var text = "I don’t know how to explain this, but meeting you was one of the best things that ever happened to me.";
+var i = 0;
+
+function typeText() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeText, 40);
+    }
+}
+
+var countDownDate = new Date("Aug 24, 2026 00:00:00").getTime();
+
+setInterval(function() {
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+  days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+}, 1000);
+
+function createHearts() {
+    setInterval(function(){
+        var heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = "800px";
+        document.body.appendChild(heart);
+
+        setTimeout(function(){
+            heart.remove();
+        }, 5000);
+    }, 500);
+}
+
+function fireworks() {
+    setInterval(function(){
+        var fire = document.createElement("div");
+        fire.innerHTML = "✨";
+        fire.style.position = "absolute";
+        fire.style.left = Math.random() * window.innerWidth + "px";
+        fire.style.top = Math.random() * window.innerHeight + "px";
+        fire.style.fontSize = "30px";
+        document.body.appendChild(fire);
+
+        setTimeout(function(){
+            fire.remove();
+        }, 1000);
+    }, 200);
 }
 </script>
 
