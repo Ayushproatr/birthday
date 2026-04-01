@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Mahila Dost</title>
+    <style>
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            font-family: Arial;
+            padding-top: 100px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background: pink;
+        }
+
+        #main {
+            display: none;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>This website is locked</h1>
+    <p>Enter the password</p>
+
+    <input type="password" id="pass">
+    <button onclick="checkPass()">Enter</button>
+
+    <div id="main">
+        <h1>Happy Birthday!</h1>
+        <p>I made this website just for you.</p>
+        <p>You are very important to me.</p>
+    </div>
+
+<script>
+function checkPass() {
+    var password = document.getElementById("pass").value;
+
+    if(password == "formymahiladost") {
+        document.getElementById("main").style.display = "block";
+    } else {
+        alert("Wrong Password");
+    }
+}
+</script>
+
+</body>
+</html>
