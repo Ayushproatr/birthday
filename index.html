@@ -10,6 +10,7 @@
             text-align: center;
             padding: 30px;
             overflow: hidden;
+            transition: background 1s;
         }
 
         button {
@@ -70,13 +71,17 @@
 
         .cake {
             font-size: 80px;
-            animation: cakeBounce 2s infinite;
         }
 
-        @keyframes cakeBounce {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0); }
+        .confetti {
+            position: absolute;
+            font-size: 20px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px); }
+            100% { transform: translateY(800px); }
         }
     </style>
 </head>
@@ -84,14 +89,14 @@
 
 <div class="stars"></div>
 
-<audio id="music" loop>
+<audio id="music" autoplay loop>
   <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <div id="start">
-    <h1>I made something for you Kirti</h1>
-    <h2 id="countdown"></h2>
-    <button onclick="showPassword()">Click to Start</button>
+    <h1>Before You Start</h1>
+    <p>Use earphones for better experience</p>
+    <button onclick="showPassword()">Start</button>
 </div>
 
 <div id="passwordPage" class="page">
@@ -104,71 +109,48 @@
 <div id="page1" class="page">
     <h1 class="glow">Happy Birthday Kirti</h1>
     <p id="typing"></p>
-    <button onclick="nextPage('page2')">Next</button>
+    <button onclick="nextPage('page2', '#1a001a')">Next</button>
 </div>
 
 <div id="page2" class="page">
     <h1>You Are Special</h1>
-    <p>
-    You are one of the most kind, caring, and beautiful souls I have ever known.
-    You always listen, you always understand, and you always stay even when things are not perfect.
-    I am really very lucky to have you in my life.
-    </p>
-    <button onclick="nextPage('page3')">Next</button>
+    <p>You are one of the most kind, caring, and beautiful souls I have ever known.</p>
+    <button onclick="nextPage('page3', '#001a1a')">Next</button>
 </div>
 
 <div id="page3" class="page">
     <h1>Queen Kirti</h1>
-    <p>
-    Today is not just your birthday.
-    Today the world got a beautiful heart, a beautiful smile, and a beautiful person.
-    So today you are Queen Kirti, and you deserve to feel special the whole day.
-    </p>
-    <button onclick="nextPage('page4')">Next</button>
+    <p>Today you are not just Kirti. Today you are Queen Kirti.</p>
+    <button onclick="nextPage('page4', '#1a001a')">Next</button>
 </div>
 
 <div id="page4" class="page">
     <h1>Happp Moment</h1>
-    <p>
-    I still laugh when you say "Happp" instead of shut up.
-    Small things like this are the reason our friendship is special and different.
-    </p>
-    <button onclick="nextPage('page5')">Next</button>
+    <p>I still laugh when you say Happp.</p>
+    <button onclick="nextPage('page5', '#001a00')">Next</button>
 </div>
 
 <div id="page5" class="page">
     <h1>Our Goal</h1>
-    <p>
-    One day we will meet, eat a lot of delicious food, talk for hours,
-    laugh without any reason, and that day will be one of my favorite days in life.
-    </p>
-    <button onclick="nextPage('page6')">Next</button>
+    <p>One day we will meet and eat delicious food together.</p>
+    <button onclick="nextPage('page6', '#1a001a')">Next</button>
 </div>
 
 <div id="page6" class="page">
     <h1>Birthday Cake For You</h1>
     <div class="cake">🎂🕯</div>
-    <p>
-    If I could, I would bring a real cake for you.
-    But for now, this is a small digital cake for the most special birthday girl.
-    Make a wish.
-    </p>
-    <button onclick="nextPage('page7')">Next</button>
+    <button onclick="blowCandle()">Blow Candle</button>
 </div>
 
 <div id="page7" class="page">
     <h1>Final Message</h1>
-    <p>
-    I don’t know what the future holds,
-    but I just want you to know that you are a very important part of my life.
-    No matter how much things change,
-    you will always be someone I care about and respect.
-    I just want to see you happy and successful.
-    Happy Birthday Kirti.
-    </p>
-    <button onclick="secretMessage()">Click One Last Time</button>
-    <br>
-    <button onclick="longMessage()">One More Message</button>
+    <p>You are a very important part of my life. Happy Birthday Kirti.</p>
+    <button onclick="endScreen()">Finish</button>
+</div>
+
+<div id="end" class="page">
+    <h1 class="glow">The End</h1>
+    <h2>Happy Birthday Queen Kirti</h2>
 </div>
 
 <script>
@@ -179,11 +161,9 @@ function showPassword() {
 
 function checkPass() {
     var password = document.getElementById("pass").value;
-
     if(password == "formymahiladost") {
         document.getElementById("passwordPage").style.display = "none";
         document.getElementById("page1").style.display = "block";
-        document.getElementById("music").play();
         createHearts();
         typeText();
     } else {
@@ -191,49 +171,36 @@ function checkPass() {
     }
 }
 
-function nextPage(page) {
-    var pages = ["page1","page2","page3","page4","page5","page6","page7"];
-    pages.forEach(function(p){
-        document.getElementById(p).style.display = "none";
-    });
+function nextPage(page, color) {
+    var pages = document.querySelectorAll(".page");
+    pages.forEach(p => p.style.display = "none");
     document.getElementById(page).style.display = "block";
+    document.body.style.background = color;
 }
 
-function secretMessage() {
-    fireworks();
-    alert("You are not just beautiful by face, you are beautiful by heart and nature. Never change.");
+function blowCandle() {
+    document.querySelector(".cake").innerHTML = "🎂";
+    confetti();
+    setTimeout(() => nextPage('page7', '#1a001a'), 2000);
 }
 
-function longMessage() {
-    alert("If I had to choose good people in my life, I would choose you again without thinking.");
+function endScreen() {
+    nextPage('end', 'black');
+    confetti();
 }
-
-var text = "I don’t know how to explain this, but meeting you was one of the best things that ever happened to me.";
-var i = 0;
 
 function typeText() {
-    if (i < text.length) {
-        document.getElementById("typing").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeText, 40);
+    var text = "Meeting you was one of the best things that ever happened to me.";
+    var i = 0;
+    function typing() {
+        if(i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typing, 40);
+        }
     }
+    typing();
 }
-
-var countDownDate = new Date("Aug 24, 2026 00:00:00").getTime();
-
-setInterval(function() {
-  var now = new Date().getTime();
-  var distance = countDownDate - now;
-
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("countdown").innerHTML =
-  days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-
-}, 1000);
 
 function createHearts() {
     setInterval(function(){
@@ -243,26 +210,18 @@ function createHearts() {
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = "800px";
         document.body.appendChild(heart);
-
-        setTimeout(function(){
-            heart.remove();
-        }, 5000);
+        setTimeout(function(){ heart.remove(); }, 5000);
     }, 500);
 }
 
-function fireworks() {
+function confetti() {
     setInterval(function(){
-        var fire = document.createElement("div");
-        fire.innerHTML = "✨";
-        fire.style.position = "absolute";
-        fire.style.left = Math.random() * window.innerWidth + "px";
-        fire.style.top = Math.random() * window.innerHeight + "px";
-        fire.style.fontSize = "30px";
-        document.body.appendChild(fire);
-
-        setTimeout(function(){
-            fire.remove();
-        }, 1000);
+        var c = document.createElement("div");
+        c.className = "confetti";
+        c.innerHTML = "✨";
+        c.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(c);
+        setTimeout(function(){ c.remove(); }, 3000);
     }, 200);
 }
 </script>
