@@ -1,229 +1,316 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Happy Birthday Kirti</title>
-    <style>
-        body {
-            background: linear-gradient(black, #1a001a);
-            color: white;
-            font-family: Arial;
-            text-align: center;
-            padding: 30px;
-            overflow: hidden;
-            transition: background 1s;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Kirti</title>
 
-        button {
-            padding: 12px 20px;
-            border-radius: 10px;
-            border: none;
-            background: pink;
-            font-size: 16px;
-            margin-top: 20px;
-        }
+<style>
+body{
+margin:0;
+font-family:Segoe UI;
+color:white;
+background:black;
+overflow-x:hidden;
+}
 
-        input {
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-        }
+/* Intro */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:black;
+z-index:999;
+animation:fadeOut 3s forwards;
+animation-delay:5s;
+}
+@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
 
-        .page {
-            display: none;
-        }
+.name{
+font-size:50px;
+background:linear-gradient(45deg,pink,cyan);
+-webkit-background-clip:text;
+color:transparent;
+animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+from{text-shadow:0 0 10px pink;}
+to{text-shadow:0 0 30px cyan;}
+}
 
-        .heart {
-            position: absolute;
-            color: pink;
-            font-size: 20px;
-            animation: float 5s linear infinite;
-        }
+/* Sections */
+section{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+opacity:0;
+transform:translateY(50px);
+transition:1s;
+}
+.show{opacity:1; transform:translateY(0);}
 
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-800px); opacity: 0; }
-        }
+#s1{background:linear-gradient(#0f0c29,#302b63);}
+#s2{background:linear-gradient(#302b63,#24243e);}
+#s3{background:linear-gradient(#24243e,#000);}
+#s4{background:linear-gradient(#000,#1a001a);}
+#s5{background:#111;}
+#s6{background:black;}
+#s7{background:black;}
 
-        .stars {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.imgur.com/YKY28eT.png');
-            animation: moveStars 60s linear infinite;
-            z-index: -1;
-        }
+.card{
+background:rgba(255,255,255,0.08);
+padding:25px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+width:85%;
+}
 
-        @keyframes moveStars {
-            from {background-position: 0 0;}
-            to {background-position: 10000px 5000px;}
-        }
+/* Hearts */
+.heart{
+position:absolute;
+color:pink;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+0%{transform:translateY(0);}
+100%{transform:translateY(-900px); opacity:0;}
+}
 
-        .glow {
-            font-size: 40px;
-            color: pink;
-            animation: glow 2s ease-in-out infinite alternate;
-        }
+/* Cake */
+.cake{font-size:100px;}
+.flame{
+width:12px;height:22px;
+background:orange;
+border-radius:50%;
+animation:flicker 0.2s infinite;
+margin:auto;
+}
+@keyframes flicker{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px pink; }
-            to { text-shadow: 0 0 30px purple; }
-        }
+/* Buttons */
+button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:linear-gradient(45deg,pink,purple);
+color:white;
+margin-top:20px;
+}
 
-        .cake {
-            font-size: 80px;
-        }
+/* Confetti */
+.confetti{
+position:absolute;
+font-size:20px;
+animation:fall 3s linear infinite;
+}
+@keyframes fall{
+0%{transform:translateY(-100px);}
+100%{transform:translateY(900px);}
+}
 
-        .confetti {
-            position: absolute;
-            font-size: 20px;
-            animation: fall 3s linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100px); }
-            100% { transform: translateY(800px); }
-        }
-    </style>
+/* Fireworks */
+.firework{
+position:absolute;
+font-size:25px;
+animation:explode 1s linear;
+}
+@keyframes explode{
+0%{transform:scale(0);}
+100%{transform:scale(2); opacity:0;}
+}
+</style>
 </head>
+
 <body>
 
-<div class="stars"></div>
-
-<audio id="music" autoplay loop>
-  <source src="music.mp3" type="audio/mp3">
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mp3">
 </audio>
 
-<div id="start">
-    <h1>Before You Start</h1>
-    <p>Use earphones for better experience</p>
-    <button onclick="showPassword()">Start</button>
+<!-- Intro -->
+<div id="intro">
+<h1 class="name">Kirti</h1>
+<p>Something special is about to begin...</p>
 </div>
 
-<div id="passwordPage" class="page">
-    <h2>Enter Password</h2>
-    <input type="password" id="pass">
-    <br>
-    <button onclick="checkPass()">Enter</button>
-</div>
+<!-- Sections -->
 
-<div id="page1" class="page">
-    <h1 class="glow">Happy Birthday Kirti</h1>
-    <p id="typing"></p>
-    <button onclick="nextPage('page2', '#1a001a')">Next</button>
-</div>
+<section id="s1"><div class="card">
+<h1>Happy Birthday Kirti</h1>
+<p id="typing"></p>
+</div></section>
 
-<div id="page2" class="page">
-    <h1>You Are Special</h1>
-    <p>You are one of the most kind, caring, and beautiful souls I have ever known.</p>
-    <button onclick="nextPage('page3', '#001a1a')">Next</button>
-</div>
+<section id="s2"><div class="card">
+<h2>You Are Special</h2>
+<p>You are one of the most amazing people in my life.</p>
+</div></section>
 
-<div id="page3" class="page">
-    <h1>Queen Kirti</h1>
-    <p>Today you are not just Kirti. Today you are Queen Kirti.</p>
-    <button onclick="nextPage('page4', '#1a001a')">Next</button>
+<section id="s3"><div class="card">
+<h2>Memory Timeline</h2>
+<div>
+<p>✨ We met</p>
+<p>💬 Started talking</p>
+<p>😂 Happp moments</p>
+<p>🤝 Best friends</p>
 </div>
+</div></section>
 
-<div id="page4" class="page">
-    <h1>Happp Moment</h1>
-    <p>I still laugh when you say Happp.</p>
-    <button onclick="nextPage('page5', '#001a00')">Next</button>
-</div>
+<section id="s4"><div class="card">
+<h2>Why You’re So Special</h2>
+<div id="specialText"></div>
+</div></section>
 
-<div id="page5" class="page">
-    <h1>Our Goal</h1>
-    <p>One day we will meet and eat delicious food together.</p>
-    <button onclick="nextPage('page6', '#1a001a')">Next</button>
-</div>
+<section id="s5"><div class="card">
+<h2>Voice Message</h2>
+<button onclick="speak()">Play Message</button>
+</div></section>
 
-<div id="page6" class="page">
-    <h1>Birthday Cake For You</h1>
-    <div class="cake">🎂🕯</div>
-    <button onclick="blowCandle()">Blow Candle</button>
-</div>
+<section id="s6"><div class="card">
+<h2>Birthday Cake</h2>
+<div class="cake">🎂</div>
+<div class="flame" id="flame"></div>
+<button onclick="blow()">Blow Candle</button>
+<p id="letter"></p>
+</div></section>
 
-<div id="page7" class="page">
-    <h1>Final Message</h1>
-    <p>You are a very important part of my life. Happy Birthday Kirti.</p>
-    <button onclick="endScreen()">Finish</button>
-</div>
-
-<div id="end" class="page">
-    <h1 class="glow">The End</h1>
-    <h2>Happy Birthday Queen Kirti</h2>
-</div>
+<section id="s7"><div class="card">
+<h1 class="name">Happy Birthday Queen Kirti</h1>
+</div></section>
 
 <script>
-function showPassword() {
-    document.getElementById("start").style.display = "none";
-    document.getElementById("passwordPage").style.display = "block";
+/* Scroll animation */
+window.addEventListener('scroll',()=>{
+document.querySelectorAll('section').forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight - 100){
+sec.classList.add('show');
+}
+});
+});
+
+/* Typing intro */
+setTimeout(()=>{
+let text="Meeting you was one of the best things that ever happened to me.";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text[i];
+i++;
+setTimeout(type,40);
+}}
+type();
+},5000);
+
+/* Hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*window.innerWidth+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},500);
+
+/* Special lines */
+let lines=[
+"You always understand me.",
+"You make normal moments special.",
+"Your presence matters.",
+"You are kind and real.",
+"I’m lucky to have you."
+];
+let index=0;
+
+function showLines(){
+if(index<lines.length){
+let p=document.createElement("p");
+p.innerText=lines[index];
+p.style.opacity=0;
+p.style.transition="1s";
+document.getElementById("specialText").appendChild(p);
+setTimeout(()=>p.style.opacity=1,100);
+index++;
+setTimeout(showLines,2000);
+}
 }
 
-function checkPass() {
-    var password = document.getElementById("pass").value;
-    if(password == "formymahiladost") {
-        document.getElementById("passwordPage").style.display = "none";
-        document.getElementById("page1").style.display = "block";
-        createHearts();
-        typeText();
-    } else {
-        alert("Wrong Password");
-    }
+window.addEventListener("scroll",()=>{
+let sec=document.getElementById("s4");
+if(sec.getBoundingClientRect().top < window.innerHeight-100){
+if(index===0) showLines();
+}
+});
+
+/* Voice */
+function speak(){
+let msg=new SpeechSynthesisUtterance("Happy Birthday Kirti. You are very special.");
+speechSynthesis.speak(msg);
 }
 
-function nextPage(page, color) {
-    var pages = document.querySelectorAll(".page");
-    pages.forEach(p => p.style.display = "none");
-    document.getElementById(page).style.display = "block";
-    document.body.style.background = color;
+/* Blow candle */
+function blow(){
+document.getElementById("flame").style.display="none";
+confetti();
+fireworks();
+letter();
 }
 
-function blowCandle() {
-    document.querySelector(".cake").innerHTML = "🎂";
-    confetti();
-    setTimeout(() => nextPage('page7', '#1a001a'), 2000);
+/* Confetti */
+function confetti(){
+setInterval(()=>{
+let c=document.createElement("div");
+c.className="confetti";
+c.innerHTML="✨";
+c.style.left=Math.random()*window.innerWidth+"px";
+document.body.appendChild(c);
+setTimeout(()=>c.remove(),3000);
+},200);
 }
 
-function endScreen() {
-    nextPage('end', 'black');
-    confetti();
+/* Fireworks */
+function fireworks(){
+setInterval(()=>{
+let f=document.createElement("div");
+f.className="firework";
+f.innerHTML="🎆";
+f.style.left=Math.random()*window.innerWidth+"px";
+f.style.top=Math.random()*window.innerHeight+"px";
+document.body.appendChild(f);
+setTimeout(()=>f.remove(),1000);
+},500);
 }
 
-function typeText() {
-    var text = "Meeting you was one of the best things that ever happened to me.";
-    var i = 0;
-    function typing() {
-        if(i < text.length) {
-            document.getElementById("typing").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typing, 40);
-        }
-    }
-    typing();
+/* Final letter */
+function letter(){
+let text="You are a very special person in my life. I hope you always stay happy and smiling. Happy Birthday Kirti.";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("letter").innerHTML+=text[i];
+i++;
+setTimeout(type,40);
+}}
+type();
 }
 
-function createHearts() {
-    setInterval(function(){
-        var heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.top = "800px";
-        document.body.appendChild(heart);
-        setTimeout(function(){ heart.remove(); }, 5000);
-    }, 500);
+/* SECRET TAP */
+let taps=0;
+document.body.addEventListener("click",()=>{
+taps++;
+if(taps==5){
+alert("You found the secret 😏\nYou mean more to me than you know.");
 }
-
-function confetti() {
-    setInterval(function(){
-        var c = document.createElement("div");
-        c.className = "confetti";
-        c.innerHTML = "✨";
-        c.style.left = Math.random() * window.innerWidth + "px";
-        document.body.appendChild(c);
-        setTimeout(function(){ c.remove(); }, 3000);
-    }, 200);
-}
+});
 </script>
 
 </body>
