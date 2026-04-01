@@ -1,317 +1,218 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Kirti</title>
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>Happy Birthday Kirti \ud83c\udf82</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
 <style>
-body{
-margin:0;
-font-family:Segoe UI;
-color:white;
-background:black;
-overflow-x:hidden;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+:root{
+  --rose:#ff3d7f;--pink:#ff85b3;--peach:#ffb347;--gold:#ffd700;
+  --purple:#bf5af2;--teal:#00d4c8;--cream:#fff8f0;--dark:#0d0010;
+}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;
+  font-family:'Quicksand',sans-serif;user-select:none;}
+
+/* \u2500\u2500 SHELL \u2500\u2500 */
+#app{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+  background:radial-gradient(ellipse at 50% 50%,#180020 0%,#000 100%);}
+#phone{
+  width:min(100vw,420px);height:min(100vh,860px);
+  position:relative;overflow:hidden;
+  border-radius:min(4vw,32px);background:#000;
+  box-shadow:0 0 0 1px rgba(255,255,255,.07),
+             0 40px 100px rgba(0,0,0,.9),
+             0 0 80px rgba(255,61,127,.1);
 }
 
-/* Intro */
-#intro{
-position:fixed;
-width:100%;
-height:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-background:black;
-z-index:999;
-animation:fadeOut 3s forwards;
-animation-delay:5s;
-}
-@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
+/* \u2500\u2500 STORY BARS \u2500\u2500 */
+#bars{position:absolute;top:0;left:0;right:0;padding:10px 8px 0;
+  display:flex;gap:4px;z-index:100;}
+.bt{flex:1;height:2px;background:rgba(255,255,255,.22);border-radius:2px;overflow:hidden;}
+.bf{height:100%;width:0%;background:#fff;border-radius:2px;transition:width linear;}
+.bf.done{width:100%;transition:none;}
 
-.name{
-font-size:50px;
-background:linear-gradient(45deg,pink,cyan);
--webkit-background-clip:text;
-color:transparent;
-animation:glow 2s infinite alternate;
-}
-@keyframes glow{
-from{text-shadow:0 0 10px pink;}
-to{text-shadow:0 0 30px cyan;}
-}
+/* \u2500\u2500 HUD \u2500\u2500 */
+#hud{position:absolute;top:20px;left:0;right:0;padding:0 14px;
+  display:flex;align-items:center;justify-content:space-between;z-index:100;}
+.hp{display:flex;align-items:center;gap:9px;}
+.av{width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose),var(--purple));
+  display:flex;align-items:center;justify-content:center;font-size:15px;
+  border:1.5px solid rgba(255,255,255,.3);}
+.hn{font-size:12.5px;font-weight:700;color:#fff;}
+.ht{font-size:10.5px;color:rgba(255,255,255,.5);}
+.hr{display:flex;gap:12px;align-items:center;}
+.hi{font-size:20px;cursor:pointer;filter:drop-shadow(0 1px 4px rgba(0,0,0,.6));}
 
-/* Sections */
-section{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-padding:20px;
-opacity:0;
-transform:translateY(50px);
-transition:1s;
-}
-.show{opacity:1; transform:translateY(0);}
+/* \u2500\u2500 SLIDES \u2500\u2500 */
+#slides{width:100%;height:100%;position:relative;}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:76px 26px 108px;opacity:0;pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;}
+.slide.active{opacity:1;pointer-events:all;}
+.slide.exit-left{opacity:0;transform:scale(.94);}
+.slide.enter-right{opacity:0;transform:scale(1.04);}
 
-#s1{background:linear-gradient(#0f0c29,#302b63);}
-#s2{background:linear-gradient(#302b63,#24243e);}
-#s3{background:linear-gradient(#24243e,#000);}
-#s4{background:linear-gradient(#000,#1a001a);}
-#s5{background:#111;}
-#s6{background:black;}
-#s7{background:black;}
+/* \u2500\u2500 BGs \u2500\u2500 */
+.s0{background:linear-gradient(155deg,#0d0010,#200030,#100018);}
+.s1{background:linear-gradient(155deg,#1a0010,#300020,#1a0010);}
+.s2{background:linear-gradient(155deg,#00101a,#001a2d,#000d1a);}
+.s3{background:linear-gradient(155deg,#150010,#280022,#0d000a);}
+.s4{background:linear-gradient(155deg,#0a1400,#162400,#0a1400);}
+.s5{background:radial-gradient(ellipse at 50% 70%,#280028,#0d0010 70%);}
+.s6{background:linear-gradient(155deg,#000015,#100030,#000015);}
+.s7{background:radial-gradient(ellipse at 50% 40%,#200028 0%,#0d0010 70%);}
 
-.card{
-background:rgba(255,255,255,0.08);
-padding:25px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-width:85%;
+/* grain */
+.slide::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.22;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");}
+
+/* \u2500\u2500 FLOATING STICKERS \u2500\u2500 */
+.flt{position:absolute;font-size:clamp(18px,5vw,26px);
+  animation:fsway var(--d,6s) ease-in-out infinite var(--dl,0s);
+  pointer-events:none;z-index:10;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.5));}
+@keyframes fsway{
+  0%,100%{transform:translateY(0) rotate(var(--r,0deg)) scale(1);}
+  40%{transform:translateY(-12px) rotate(calc(var(--r,0deg)+5deg)) scale(1.08);}
+  70%{transform:translateY(5px) rotate(calc(var(--r,0deg)-4deg)) scale(.96);}
 }
 
-/* Hearts */
-.heart{
-position:absolute;
-color:pink;
-animation:float 6s linear infinite;
-}
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-900px); opacity:0;}
-}
+/* \u2500\u2500 TYPE \u2500\u2500 */
+.lbl{font-size:10px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;
+  color:rgba(255,255,255,.4);margin-bottom:10px;
+  display:flex;align-items:center;gap:10px;position:relative;z-index:1;}
+.lbl::before,.lbl::after{content:'';flex:1;height:1px;max-width:36px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);}
 
-/* Cake */
-.cake{font-size:100px;}
-.flame{
-width:12px;height:22px;
-background:orange;
-border-radius:50%;
-animation:flicker 0.2s infinite;
-margin:auto;
-}
-@keyframes flicker{
-0%{transform:scale(1);}
-50%{transform:scale(1.2);}
-100%{transform:scale(1);}
-}
+.hero{font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,15vw,86px);line-height:.92;letter-spacing:.02em;color:#fff;
+  text-shadow:0 0 60px rgba(255,61,127,.35);position:relative;z-index:1;}
+.script{font-family:'Dancing Script',cursive;
+  font-size:clamp(30px,9vw,52px);line-height:1.1;color:#fff;position:relative;z-index:1;}
+.gt{background:linear-gradient(135deg,var(--rose),var(--peach),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  background-size:200%;animation:gs 4s linear infinite;}
+.pt{background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tt{background:linear-gradient(135deg,var(--teal),#60a5fa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+@keyframes gs{0%{background-position:0%;}100%{background-position:200%;}}
+.body{font-size:clamp(13.5px,3.6vw,16.5px);line-height:1.72;
+  color:rgba(255,255,255,.72);font-weight:500;max-width:330px;position:relative;z-index:1;}
 
-/* Buttons */
-button{
-padding:12px 25px;
-border:none;
-border-radius:25px;
-background:linear-gradient(45deg,pink,purple);
-color:white;
-margin-top:20px;
-}
+/* \u2500\u2500 PANELS \u2500\u2500 */
+.pglass{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.11);
+  border-radius:22px;padding:24px 22px;width:100%;max-width:330px;
+  backdrop-filter:blur(18px);position:relative;z-index:1;
+  box-shadow:0 8px 40px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.09);}
 
-/* Confetti */
-.confetti{
-position:absolute;
-font-size:20px;
-animation:fall 3s linear infinite;
-}
-@keyframes fall{
-0%{transform:translateY(-100px);}
-100%{transform:translateY(900px);}
-}
+.pquote{position:relative;
+  background:linear-gradient(135deg,rgba(255,61,127,.12),rgba(191,90,242,.12));
+  border:1px solid rgba(255,61,127,.28);
+  border-radius:22px 22px 22px 4px;
+  padding:28px 22px 22px;width:100%;max-width:330px;z-index:1;}
+.pquote::before{content:'"';position:absolute;top:-6px;left:14px;
+  font-size:72px;line-height:1;color:var(--rose);opacity:.2;
+  font-family:'Dancing Script',cursive;}
 
-/* Fireworks */
-.firework{
-position:absolute;
-font-size:25px;
-animation:explode 1s linear;
-}
-@keyframes explode{
-0%{transform:scale(0);}
-100%{transform:scale(2); opacity:0;}
-}
-</style>
-</head>
+/* \u2500\u2500 TRAITS \u2500\u2500 */
+.traits{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  max-width:330px;position:relative;z-index:1;margin-top:8px;}
+.tr{padding:8px 16px;border-radius:50px;font-size:12.5px;font-weight:700;
+  border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.06);
+  color:#fff;backdrop-filter:blur(8px);
+  animation:pop .5s cubic-bezier(.34,1.56,.64,1) both;}
+.tr.r{border-color:rgba(255,61,127,.38);background:rgba(255,61,127,.11);}
+.tr.p{border-color:rgba(191,90,242,.38);background:rgba(191,90,242,.11);}
+.tr.g{border-color:rgba(255,215,0,.38);background:rgba(255,215,0,.09);}
+.tr.t{border-color:rgba(0,212,200,.38);background:rgba(0,212,200,.09);}
+@keyframes pop{from{opacity:0;transform:scale(.65);}to{opacity:1;transform:scale(1);}}
 
-<body>
+/* \u2500\u2500 MEMORY STACK \u2500\u2500 */
+.mstack{width:100%;max-width:316px;position:relative;z-index:1;
+  display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+.mi{display:flex;align-items:flex-start;gap:12px;
+  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;padding:13px 14px;text-align:left;
+  animation:slr .6s cubic-bezier(.16,1,.3,1) both;}
+@keyframes slr{from{opacity:0;transform:translateX(-22px);}to{opacity:1;transform:translateX(0);}}
+.mico{font-size:22px;flex-shrink:0;margin-top:1px;}
+.mtit{font-size:12.5px;font-weight:700;color:#fff;margin-bottom:3px;}
+.mdsc{font-size:11.5px;color:rgba(255,255,255,.52);line-height:1.5;}
 
-<audio autoplay loop>
-<source src="music.mp3" type="audio/mp3">
-</audio>
+/* \u2500\u2500 PHOTO LETTER PANEL \u2500\u2500 */
+.photo-card{
+  width:100%;max-width:300px;position:relative;z-index:1;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);
+  border-radius:22px;padding:22px;
+  box-shadow:0 12px 48px rgba(0,0,0,.4);}
+.polaroid{
+  background:rgba(255,255,255,.08);border-radius:12px;
+  width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:72px;margin-bottom:16px;
+  border:1px solid rgba(255,255,255,.1);}
+.pc-text{font-family:'Dancing Script',cursive;font-size:clamp(16px,4.5vw,20px);
+  color:rgba(255,255,255,.88);line-height:1.6;text-align:left;}
+.pc-date{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.2em;
+  text-transform:uppercase;margin-top:12px;text-align:right;}
 
-<!-- Intro -->
-<div id="intro">
-<h1 class="name">Kirti</h1>
-<p>Something special is about to begin...</p>
-</div>
+/* \u2500\u2500 CAKE \u2500\u2500 */
+.cake-wrap{display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;gap:16px;}
+.csw{filter:drop-shadow(0 0 28px rgba(255,179,71,.22));}
+.blow-ring{width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose),var(--purple));
+  display:flex;align-items:center;justify-content:center;font-size:26px;
+  box-shadow:0 0 0 0 rgba(255,61,127,.5);animation:bp 2s infinite;
+  border:none;cursor:pointer;}
+@keyframes bp{0%{box-shadow:0 0 0 0 rgba(255,61,127,.5);}
+  70%{box-shadow:0 0 0 14px rgba(255,61,127,0);}100%{box-shadow:0 0 0 0 rgba(255,61,127,0);}}
+.blbl{font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.45);text-transform:uppercase;}
+#ltrbox{background:rgba(255,215,0,.07);border:1px solid rgba(255,215,0,.18);border-radius:16px;
+  padding:16px 18px;font-family:'Dancing Script',cursive;font-size:clamp(14px,4vw,17px);
+  color:rgba(255,255,255,.9);line-height:1.65;max-width:310px;width:100%;display:none;}
+.ff{animation:fff .15s ease-in-out infinite alternate;transform-origin:50% 100%;}
+@keyframes fff{from{transform:scaleX(1) skewX(0);}to{transform:scaleX(.8) skewX(5deg);}}
+.fi{animation:ffi .12s ease-in-out infinite alternate;transform-origin:50% 100%;}
+@keyframes ffi{from{transform:scaleY(1);}to{transform:scaleY(.85);}}
+.sm{animation:smk 1.8s ease-out forwards;opacity:0;}
+@keyframes smk{0%{opacity:.5;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-34px) scale(2.5);}}
 
-<!-- Sections -->
+/* \u2500\u2500 FINAL \u2500\u2500 */
+#fwc{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.fglow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,rgba(255,61,127,.15),transparent 65%);}
 
-<section id="s1"><div class="card">
-<h1>Happy Birthday Kirti</h1>
-<p id="typing"></p>
-</div></section>
+/* \u2500\u2500 VOICE \u2500\u2500 */
+.vbtn{display:flex;align-items:center;gap:10px;padding:13px 22px;border-radius:50px;border:none;
+  background:linear-gradient(135deg,var(--rose),var(--purple));
+  color:#fff;font-family:'Quicksand',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 22px rgba(255,61,127,.38);transition:.25s;position:relative;z-index:1;}
+.vbtn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,61,127,.5);}
+.wv{display:flex;gap:3px;align-items:center;height:17px;opacity:0;transition:.3s;}
+.wv.on{opacity:1;}
+.wb{width:3px;border-radius:2px;background:#fff;animation:wvs .7s ease-in-out infinite;}
+.wb:nth-child(1){height:5px;}
+.wb:nth-child(2){height:13px;animation-delay:.1s;}
+.wb:nth-child(3){height:8px;animation-delay:.2s;}
+.wb:nth-child(4){height:16px;animation-delay:.08s;}
+.wb:nth-child(5){height:6px;animation-delay:.16s;}
+@keyframes wvs{0%,100%{transform:scaleY(1);}50%{transform:scaleY(1.8);}}
 
-<section id="s2"><div class="card">
-<h2>You Are Special</h2>
-<p>You are one of the most amazing people in my life.</p>
-</div></section>
-
-<section id="s3"><div class="card">
-<h2>Memory Timeline</h2>
-<div>
-<p>✨ We met</p>
-<p>💬 Started talking</p>
-<p>😂 Happp moments</p>
-<p>🤝 Best friends</p>
-</div>
-</div></section>
-
-<section id="s4"><div class="card">
-<h2>Why You’re So Special</h2>
-<div id="specialText"></div>
-</div></section>
-
-<section id="s5"><div class="card">
-<h2>Voice Message</h2>
-<button onclick="speak()">Play Message</button>
-</div></section>
-
-<section id="s6"><div class="card">
-<h2>Birthday Cake</h2>
-<div class="cake">🎂</div>
-<div class="flame" id="flame"></div>
-<button onclick="blow()">Blow Candle</button>
-<p id="letter"></p>
-</div></section>
-
-<section id="s7"><div class="card">
-<h1 class="name">Happy Birthday Queen Kirti</h1>
-</div></section>
-
-<script>
-/* Scroll animation */
-window.addEventListener('scroll',()=>{
-document.querySelectorAll('section').forEach(sec=>{
-if(sec.getBoundingClientRect().top < window.innerHeight - 100){
-sec.classList.add('show');
-}
-});
-});
-
-/* Typing intro */
-setTimeout(()=>{
-let text="Meeting you was one of the best things that ever happened to me.";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text[i];
-i++;
-setTimeout(type,40);
-}}
-type();
-},5000);
-
-/* Hearts */
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤";
-h.style.left=Math.random()*window.innerWidth+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),6000);
-},500);
-
-/* Special lines */
-let lines=[
-"You always understand me.",
-"You make normal moments special.",
-"Your presence matters.",
-"You are kind and real.",
-"I’m lucky to have you."
-];
-let index=0;
-
-function showLines(){
-if(index<lines.length){
-let p=document.createElement("p");
-p.innerText=lines[index];
-p.style.opacity=0;
-p.style.transition="1s";
-document.getElementById("specialText").appendChild(p);
-setTimeout(()=>p.style.opacity=1,100);
-index++;
-setTimeout(showLines,2000);
-}
-}
-
-window.addEventListener("scroll",()=>{
-let sec=document.getElementById("s4");
-if(sec.getBoundingClientRect().top < window.innerHeight-100){
-if(index===0) showLines();
-}
-});
-
-/* Voice */
-function speak(){
-let msg=new SpeechSynthesisUtterance("Happy Birthday Kirti. You are very special.");
-speechSynthesis.speak(msg);
-}
-
-/* Blow candle */
-function blow(){
-document.getElementById("flame").style.display="none";
-confetti();
-fireworks();
-letter();
-}
-
-/* Confetti */
-function confetti(){
-setInterval(()=>{
-let c=document.createElement("div");
-c.className="confetti";
-c.innerHTML="✨";
-c.style.left=Math.random()*window.innerWidth+"px";
-document.body.appendChild(c);
-setTimeout(()=>c.remove(),3000);
-},200);
-}
-
-/* Fireworks */
-function fireworks(){
-setInterval(()=>{
-let f=document.createElement("div");
-f.className="firework";
-f.innerHTML="🎆";
-f.style.left=Math.random()*window.innerWidth+"px";
-f.style.top=Math.random()*window.innerHeight+"px";
-document.body.appendChild(f);
-setTimeout(()=>f.remove(),1000);
-},500);
-}
-
-/* Final letter */
-function letter(){
-let text="You are a very special person in my life. I hope you always stay happy and smiling. Happy Birthday Kirti.";
-let i=0;
-function type(){
-if(i<text.length){
-document.getElementById("letter").innerHTML+=text[i];
-i++;
-setTimeout(type,40);
-}}
-type();
-}
-
-/* SECRET TAP */
-let taps=0;
-document.body.addEventListener("click",()=>{
-taps++;
-if(taps==5){
-alert("You found the secret 😏\nYou mean more to me than you know.");
-}
-});
-</script>
-
-</body>
-</html>
+/* \u2500\u2500 ACTION BAR \u2500\u2500 */
+#abar{position:absolute;bottom:0;left:0;right:0;padding:14px 18px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  background:linear-gradient(0deg,rgba(0,0,0,.72) 0%,transparent 100%);z-index:100;}
+.abtn{flex:1;padding:12.5px 10px;border-radius:50px;border:none;
+  font-family:'Quicksand',sans-serif;font-size:12.5px;font-weight:700;cursor:pointer;transition:.22s;letter-spacing:.02em;}
+.aprev{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);
+  color:rgba(255,255,255,.65);flex:0.65;}
+.aprev:hover{background:rgba(255,255,255,.16);}
+.anext{background:linear-gradient(135deg,var(--rose),var(--purple));color:#fff;
+  box-shadow:0 4px 20px rgba(255,61,127,.38);}
+.anext:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,61,127,.5);}
+.anext:active{transform:translateY(0);}
+.aico
